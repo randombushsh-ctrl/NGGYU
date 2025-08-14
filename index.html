@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ELO ELO 3 2 0</title>
+    <title>Magiczna Strona ❤️</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            background: white; /* Białe tło na start */
+            background: white;
             height: 100vh;
             overflow: hidden;
             transition: all 0.5s;
@@ -26,36 +26,70 @@
             cursor: pointer;
         }
         #content {
-            display: none; /* Ukryte na start */
+            display: none;
+        }
+        h1 {
+            color: white;
+            text-shadow: 0 0 5px black, 0 0 10px black;
+            font-size: 36px;
+            margin: 20px 0;
         }
         #gif-container {
-            margin: 20px auto;
+            margin: 10px auto;
+            width: 100%;
+            max-width: 800px;
+        }
+        #gif-container img {
+            width: 90%;
+            max-width: 600px;
+            border: 5px solid white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         #hearts-container {
-            margin: 30px auto;
-            max-width: 500px;
-            min-height: 200px;
-            border: 2px dashed #ff6b6b;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.3);
+            margin: 20px auto;
+            min-height: 100px;
         }
         .heart {
-            font-size: 24px;
+            font-size: 28px;
             margin: 5px;
             display: inline-block;
             animation: float 3s ease-in-out infinite;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
+        .counters {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            font-weight: bold;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
         .counter {
-            font-size: 20px;
-            margin: 10px;
+            font-size: 22px;
             color: #ff6b6b;
         }
+        #add-heart-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
         .rainbow-bg {
-            animation: rainbow 10s infinite linear;
+            animation: rainbow 2s infinite linear; /* Szybka tęcza! */
         }
         @keyframes rainbow {
             0% { background: #ff0000; }
@@ -75,20 +109,26 @@
 
     <!-- Etap 2: Treść po kliknięciu PLAY -->
     <div id="content">
-        <h1>DAJ SERDUSZKO MORDECZKO❤️</h1>
-        
-        <div class="counter">Liczba wejść: <span id="visit-counter">0</span></div>
-        <div class="counter">Serduszka: <span id="heart-counter">0</span></div>
+        <!-- Tytuł zamiast grafiki -->
+        <h1>Magiczna Strona ❤️</h1>
 
         <div id="gif-container">
-            <img src="loop.gif" alt="Animacja" width="300" loop>
+            <img src="loop.gif" alt="Animacja" loop>
         </div>
 
         <div id="hearts-container"></div>
+        
+        <button id="add-heart-btn" onclick="addHeart()">Dodaj serduszko ❤️</button>
 
         <audio id="bg-music" loop>
             <source src="background.mp3" type="audio/mp3">
         </audio>
+
+        <!-- Liczniki na dole -->
+        <div class="counters">
+            <div class="counter">Wejścia: <span id="visit-counter">0</span></div>
+            <div class="counter">Serduszka: <span id="heart-counter">0</span></div>
+        </div>
     </div>
 
     <script>
@@ -100,21 +140,25 @@
             document.getElementById('body').classList.add('rainbow-bg');
 
             // Odtwórz muzykę
-            document.getElementById('bg-music').play();
+            document.getElementById('bg-music').play().catch(e => {
+                // Jeśli autoodtwarzanie zablokowane
+                alert("Kliknij 'PLAY' raz jeszcze, aby włączyć dźwięk");
+                document.getElementById('bg-music').play();
+            });
 
-            // Zwiększ licznik wejść (zapis w localStorage)
+            // Zwiększ licznik wejść
             let visits = localStorage.getItem('visits') || 0;
             visits++;
             localStorage.setItem('visits', visits);
             document.getElementById('visit-counter').textContent = visits;
 
-            // Licznik serduszek
+            // Pokaż aktualną liczbę serduszek
             let hearts = localStorage.getItem('hearts') || 0;
             document.getElementById('heart-counter').textContent = hearts;
         }
 
-        // Dodawanie serduszka (1 na użytkownika)
-        document.getElementById('hearts-container').onclick = function() {
+        // Dodawanie serduszka
+        function addHeart() {
             let heartGiven = localStorage.getItem('heartGiven');
             if (!heartGiven) {
                 let hearts = parseInt(localStorage.getItem('hearts') || 0) + 1;
@@ -126,9 +170,13 @@
                 heart.className = 'heart';
                 heart.innerHTML = '❤️';
                 heart.style.left = Math.random() * 80 + '%';
-                this.appendChild(heart);
+                document.getElementById('hearts-container').appendChild(heart);
+                
+                // Wyłącz przycisk po użyciu
+                document.getElementById('add-heart-btn').disabled = true;
+                document.getElementById('add-heart-btn').textContent = "Dziękujemy!";
             }
-        };
+        }
     </script>
 </body>
 </html>
