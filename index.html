@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Tło z płynną animacją kolorów */
+        /* Szybko zmieniające się tęczowe tło */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
             background-size: 1400% 1400%;
-            animation: rainbow 15s ease infinite;
+            animation: rainbow 3s ease infinite; /* Bardzo szybka zmiana kolorów */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -38,6 +38,8 @@
             padding: 30px;
             text-align: center;
             backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
         }
 
         /* Nagłówek */
@@ -187,6 +189,39 @@
                 font-size: 3.5rem;
             }
         }
+        
+        /* Animowane elementy w tle */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+            }
+        }
+        
+        .loading {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #ff8e8e;
+        }
     </style>
     
     <!-- Firebase SDK -->
@@ -194,20 +229,24 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 </head>
 <body>
+    <!-- Animowane elementy w tle -->
+    <div class="bg-animation" id="bgAnimation"></div>
+    
     <div class="container">
         <header>
-            <h1>Elo mordeczko</h1>
+            <h1>ELO</h1>
         </header>
         
         <div class="video-container">
-            <video id="myVideo" controls autoplay muted playsinline>
+            <!-- Zastąp ścieżkę do pliku własnym filmem -->
+            <video id="myVideo" controls autoplay playsinline>
                 <source src="movie.mp4" type="video/mp4">
                 Twoja przeglądarka nie obsługuje odtwarzacza wideo.
             </video>
         </div>
 
         <div class="heart-section">
-            <p class="heart-request">Zostaw serduszko mordeczko</p>
+            <p class="heart-request">DAJ SERDUSZKO MORDECZKO❤️</p>
             <button class="heart-btn" id="heartButton">🤍</button>
             <div class="counters">
                 <div class="counter">
@@ -219,6 +258,7 @@
                     <span class="counter-number" id="visitCounter">0</span>
                 </div>
             </div>
+            <div class="loading" id="loading">Ładowanie globalnych liczników...</div>
         </div>
         
         <footer>
@@ -227,30 +267,85 @@
     </div>
 
     <script>
-        // Konfiguracja Firebase - zastąp tymi danymi z Twojego projektu Firebase
+        // ***************** KONFIGURACJA FIREBASE *****************
+        // TUTAJ WKLEJ SWOJĄ KONFIGURACJĘ Z FIREBASE!
         const firebaseConfig = {
- apiKey: "AIzaSyCZX592gzHd6hCcWy-QkpkVgXYzYiPVjS8",
-  authDomain: "nggyu-26b8e.firebaseapp.com",
-  projectId: "nggyu-26b8e",
-  storageBucket: "nggyu-26b8e.firebasestorage.app",
-  messagingSenderId: "27915937319",
-  appId: "1:27915937319:web:c6840f5c905864df9e9002",
-  measurementId: "G-BXB4TGGZV6"
-};
+            apiKey: "AIzaSyCZX592gzHd6hCcWy-QkpkVgXYzYiPVjS8",
+            authDomain: "nggyu-26b8e.firebaseapp.com",
+            projectId: "nggyu-26b8e",
+            storageBucket: "nggyu-26b8e.firebasestorage.app",
+            messagingSenderId: "27915937319",
+            appId: "1:27915937319:web:c6840f5c905864df9e9002"
+            measurementId: "G-BXB4TGGZV6"
+        };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+        // Inicjalizacja Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
         // Referencja do dokumentu z licznikami
-        const countersDoc = db.collection("counters").doc("videoPageCounters");
+        const countersDoc = db.collection("counters").doc("globalCounters");
 
+        // Funkcja tworząca animowane elementy w tle
+        function createBackgroundAnimation() {
+            const bgAnimation = document.getElementById('bgAnimation');
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffbe0b', '#fb5607', '#8338ec', '#3a86ff'];
+            
+            for (let i = 0; i < 30; i++) {
+                const element = document.createElement('div');
+                element.classList.add('bg-element');
+                
+                // Losowe właściwości
+                const size = Math.random() * 100 + 20;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 30 + 15;
+                const opacity = Math.random() * 0.5 + 0.1;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.left = `${left}%`;
+                element.style.animationDuration = `${animationDuration}s`;
+                element.style.opacity = opacity;
+                element.style.background = `radial-gradient(circle, ${color}, transparent)`;
+                element.style.animationDelay = `${Math.random() * 5}s`;
+                
+                bgAnimation.appendChild(element);
+            }
+        }
+        
         // Funkcja uruchamiana po załadowaniu strony
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.getElementById('myVideo');
             const heartButton = document.getElementById('heartButton');
             const heartCounter = document.getElementById('heartCounter');
             const visitCounter = document.getElementById('visitCounter');
+            const loading = document.getElementById('loading');
+            
+            // Utwórz animowane tło
+            createBackgroundAnimation();
+            
+            // Włącz dźwięk automatycznie
+            video.muted = false;
+            video.play().catch(e => {
+                console.log("Autoplay z dźwiękiem zablokowany, wymagane kliknięcie:", e);
+                // Jeśli autoplay jest zablokowany, dodaj przycisk do odblokowania
+                const unlockButton = document.createElement('button');
+                unlockButton.textContent = 'Kliknij, aby odblokować dźwięk';
+                unlockButton.style.margin = '10px auto';
+                unlockButton.style.padding = '10px 20px';
+                unlockButton.style.background = '#ff6b6b';
+                unlockButton.style.border = 'none';
+                unlockButton.style.borderRadius = '5px';
+                unlockButton.style.cursor = 'pointer';
+                unlockButton.style.color = 'white';
+                unlockButton.style.fontWeight = 'bold';
+                unlockButton.addEventListener('click', () => {
+                    video.play();
+                    unlockButton.remove();
+                });
+                document.querySelector('.video-container').appendChild(unlockButton);
+            });
             
             // Sprawdź, czy użytkownik już dał serduszko (w localStorage)
             const userHasLiked = localStorage.getItem("userHasLiked") === "true";
@@ -273,7 +368,7 @@ const analytics = getAnalytics(app);
                     
                     // Aktualizuj licznik wejść w Firestore
                     countersDoc.update({
-                        visits: newVisits
+                        visits: firebase.firestore.FieldValue.increment(1)
                     }).catch((error) => {
                         console.error("Błąd przy aktualizacji wejść: ", error);
                     });
@@ -286,8 +381,12 @@ const analytics = getAnalytics(app);
                     visitCounter.textContent = 1;
                     heartCounter.textContent = 0;
                 }
+                
+                // Ukryj komunikaty ładowania
+                loading.style.display = 'none';
             }).catch((error) => {
                 console.error("Błąd przy pobieraniu liczników: ", error);
+                loading.textContent = "Błąd ładowania liczników. Odśwież stronę.";
             });
             
             // Obsługa kliknięcia serduszka
@@ -296,14 +395,19 @@ const analytics = getAnalytics(app);
                     // Utwórz animowane serduszko
                     createHeartAnimation(event.clientX, event.clientY);
                     
+                    // Pokaż ładowanie
+                    loading.textContent = "Aktualizowanie globalnych serduszek...";
+                    loading.style.display = 'block';
+                    
                     // Zwiększ licznik serduszek w Firestore
-                    countersDoc.get().then((doc) => {
-                        const currentHearts = doc.data().hearts || 0;
-                        const newHearts = currentHearts + 1;
-                        
-                        countersDoc.update({
-                            hearts: newHearts
-                        }).then(() => {
+                    countersDoc.update({
+                        hearts: firebase.firestore.FieldValue.increment(1)
+                    }).then(() => {
+                        // Pobierz zaktualizowaną wartość
+                        return countersDoc.get();
+                    }).then((doc) => {
+                        if (doc.exists) {
+                            const newHearts = doc.data().hearts;
                             // Aktualizuj wyświetlany licznik
                             heartCounter.textContent = newHearts;
                             
@@ -318,17 +422,16 @@ const analytics = getAnalytics(app);
                             setTimeout(() => {
                                 heartButton.style.transform = 'scale(1)';
                             }, 300);
-                        });
+                        }
+                    }).catch((error) => {
+                        console.error("Błąd przy aktualizacji serduszek: ", error);
+                        loading.textContent = "Błąd aktualizacji. Spróbuj ponownie.";
+                    }).finally(() => {
+                        setTimeout(() => {
+                            loading.style.display = 'none';
+                        }, 2000);
                     });
                 }
-            });
-            
-            // Automatyczne uruchomienie dźwięku po kliknięciu na stronę
-            document.addEventListener('click', function initAudio() {
-                if (video.muted) {
-                    video.muted = false;
-                }
-                document.removeEventListener('click', initAudio);
             });
             
             // Funkcja tworząca animowane serduszko
