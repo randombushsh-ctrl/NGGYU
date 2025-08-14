@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ELO ELO 3 2 0</title>
+    <title>ELO MORDECZKO</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,6 +24,7 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
+            z-index: 10;
         }
         #content {
             display: none;
@@ -34,12 +35,12 @@
             font-size: 36px;
             margin: 20px 0;
         }
-        #gif-container {
+        #video-container {
             margin: 10px auto;
             width: 100%;
             max-width: 800px;
         }
-        #gif-container img {
+        #main-video {
             width: 90%;
             max-width: 600px;
             border: 5px solid white;
@@ -89,7 +90,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .rainbow-bg {
-            animation: rainbow 2s infinite linear; /* Szybka tęcza! */
+            animation: rainbow 2s infinite linear;
         }
         @keyframes rainbow {
             0% { background: #ff0000; }
@@ -101,28 +102,57 @@
             85% { background: #9400d3; }
             100% { background: #ff0000; }
         }
+        #sound-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .video-controls {
+            margin-top: 10px;
+        }
+        .video-controls button {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body id="body">
-    <!-- Etap 1: Przycisk PLAY -->
+    <!-- Przycisk PLAY na start -->
     <button id="play-button" onclick="startExperience()">▶️ PLAY</button>
 
-    <!-- Etap 2: Treść po kliknięciu PLAY -->
-    <div id="content">
-        <!-- Tytuł zamiast grafiki -->
-        <h1>ELO ELO 3 2 0</h1>
+    <!-- Przycisk do dźwięku -->
+    <button id="sound-button" style="display: none;" onclick="toggleSound()">🔇</button>
 
-        <div id="gif-container">
-            <img src="loop.gif" alt="Animacja" loop>
+    <!-- Treść po kliknięciu PLAY -->
+    <div id="content">
+        <h1>ELO MORDECZKO</h1>
+
+        <div id="video-container">
+            <video id="main-video" controls loop>
+                <source src="movie.mp4" type="video/mp4">
+                Twoja przeglądarka nie obsługuje wideo.
+            </video>
+            <div class="video-controls">
+                <button onclick="document.getElementById('main-video').play()">▶️ Odtwarzaj</button>
+                <button onclick="document.getElementById('main-video').pause()">⏸️ Pauza</button>
+            </div>
         </div>
 
         <div id="hearts-container"></div>
         
         <button id="add-heart-btn" onclick="addHeart()">DAJ SERDUSZKO MORDECZKO❤️</button>
-
-        <audio id="bg-music" loop>
-            <source src="background.mp3" type="audio/mp3">
-        </audio>
 
         <!-- Liczniki na dole -->
         <div class="counters">
@@ -138,12 +168,12 @@
             document.getElementById('play-button').style.display = 'none';
             document.getElementById('content').style.display = 'block';
             document.getElementById('body').classList.add('rainbow-bg');
+            document.getElementById('sound-button').style.display = 'block';
 
-            // Odtwórz muzykę
-            document.getElementById('bg-music').play().catch(e => {
-                // Jeśli autoodtwarzanie zablokowane
-                alert("Kliknij 'PLAY' raz jeszcze, aby włączyć dźwięk");
-                document.getElementById('bg-music').play();
+            // Uruchom wideo
+            const video = document.getElementById('main-video');
+            video.play().catch(e => {
+                console.log("Automatyczne odtwarzanie wideo zablokowane");
             });
 
             // Zwiększ licznik wejść
@@ -155,6 +185,13 @@
             // Pokaż aktualną liczbę serduszek
             let hearts = localStorage.getItem('hearts') || 0;
             document.getElementById('heart-counter').textContent = hearts;
+        }
+
+        // Funkcja włączająca/wyłączająca dźwięk
+        function toggleSound() {
+            const video = document.getElementById('main-video');
+            video.muted = !video.muted;
+            document.getElementById('sound-button').textContent = video.muted ? "🔇" : "🔊";
         }
 
         // Dodawanie serduszka
