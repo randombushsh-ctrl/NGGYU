@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ELO ELO 320</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            animation: rainbow 10s infinite linear;
+            height: 100vh;
+            overflow: hidden;
+        }
+        @keyframes rainbow {
+            0% { background: #ff0000; }
+            14% { background: #ff7f00; }
+            28% { background: #ffff00; }
+            42% { background: #00ff00; }
+            57% { background: #0000ff; }
+            71% { background: #4b0082; }
+            85% { background: #9400d3; }
+            100% { background: #ff0000; }
+        }
+        #gif-container {
+            margin: 20px auto;
+        }
+        #hearts-container {
+            margin: 30px auto;
+            max-width: 500px;
+            min-height: 200px;
+            border: 2px dashed white;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        #heart-button {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .heart {
+            font-size: 24px;
+            margin: 5px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>POLUB MORDECZKO</h1>
+    
+    <div id="gif-container">
+        <!-- Tutaj wstaw swój gif -->
+        <img src="loop.gif" alt="Animacja" width="300" loop>
+    </div>
+
+    <div id="hearts-container">
+        <!-- SERDUSZKA -->
+    </div>
+
+    <button id="heart-button" onclick="addHeart()">❤️ NO KLIKNIJ NO!</button>
+
+    <!-- Audio w tle (automatyczne odtwarzanie) -->
+    <audio autoplay loop>
+        <source src="background.mp3" type="audio/mp3">
+        Twoja przeglądarka nie obsługuje audio.
+    </audio>
+
+    <script>
+        // Dodawanie serduszek
+        function addHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 80 + '%';
+            heart.style.top = Math.random() * 80 + '%';
+            document.getElementById('hearts-container').appendChild(heart);
+        }
+
+        // Automatyczne dodawanie serduszek co 3 sekundy (opcjonalne)
+        setInterval(addHeart, 3000);
+    </script>
+</body>
+</html>
