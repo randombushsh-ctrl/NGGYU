@@ -3,109 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elo mordeczko</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
+        /* Tło z płynną animacją kolorów */
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+            background-size: 1400% 1400%;
+            animation: rainbow 15s ease infinite;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow-x: hidden;
         }
-        
-        .video-container {
-            width: 100%;
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Kontener główny */
+        .container {
             max-width: 1200px;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        video {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            display: block;
-        }
-
-        .content {
+            width: 95%;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 30px;
             text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 1200px;
-            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Nagłówek */
+        header {
             margin-bottom: 20px;
         }
 
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Kontener wideo */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            margin: 0 auto 30px;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+        }
+
+        /* Sekcja serduszka */
         .heart-section {
-            margin: 20px 0;
+            margin: 30px 0;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
         }
 
         .heart-request {
-            font-family: "Comic Sans MS", "Comic Sans", cursive;
-            font-size: 24px;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+            font-size: 2.2rem;
             color: #ff6b6b;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .heart-btn {
             background: none;
             border: none;
-            font-size: 40px;
+            font-size: 4.5rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
+            margin: 0 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
 
         .heart-btn:hover {
             transform: scale(1.2);
         }
 
+        /* Liczniki */
         .counters {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
-            font-size: 18px;
+            gap: 40px;
+            margin-top: 30px;
+            font-size: 1.4rem;
         }
 
         .counter {
-            background-color: #f8f9fa;
-            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            padding: 15px 30px;
             border-radius: 50px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .counter-number {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-top: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .counter-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* Animowane serduszko */
+        .heart-animation {
+            position: absolute;
+            pointer-events: none;
+            font-size: 2rem;
+            animation: heartFloat 1.5s ease-out forwards;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Stopka */
+        footer {
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .counters {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .counter {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .heart-request {
+                font-size: 1.7rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .heart-btn {
+                font-size: 3.5rem;
+            }
         }
     </style>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 </head>
 <body>
-    <div class="video-container">
-        <!-- Zastąp ścieżkę do pliku własnym filmem -->
-        <video id="myVideo" controls autoplay muted playsinline>
-            <source src="movie.mp4" type="video/mp4">
-            Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-        </video>
-    </div>
+    <div class="container">
+        <header>
+            <h1>Elo mordeczko</h1>
+        </header>
+        
+        <div class="video-container">
+            <video id="myVideo" controls autoplay muted playsinline>
+                <source src="twój_film.mp4" type="video/mp4">
+                Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+            </video>
+        </div>
 
-    <div class="content">
         <div class="heart-section">
-            <p class="heart-request">Zostaw serduszko pls❤️</p>
+            <p class="heart-request">Zostaw serduszko mordeczko</p>
             <button class="heart-btn" id="heartButton">🤍</button>
             <div class="counters">
-                <div class="counter">Serduszka: <span id="heartCounter">0</span></div>
-                <div class="counter">Wejścia: <span id="visitCounter">0</span></div>
+                <div class="counter">
+                    <span class="counter-label">SERDUSZKA:</span>
+                    <span class="counter-number" id="heartCounter">0</span>
+                </div>
+                <div class="counter">
+                    <span class="counter-label">WEJŚCIA:</span>
+                    <span class="counter-number" id="visitCounter">0</span>
+                </div>
             </div>
         </div>
+        
+        <footer>
+            <p>Strona stworzona z ❤️ | Liczniki aktualizowane globalnie</p>
+        </footer>
     </div>
 
     <script>
+        // Konfiguracja Firebase - zastąp tymi danymi z Twojego projektu Firebase
+        const firebaseConfig = {
+ apiKey: "AIzaSyCZX592gzHd6hCcWy-QkpkVgXYzYiPVjS8",
+  authDomain: "nggyu-26b8e.firebaseapp.com",
+  projectId: "nggyu-26b8e",
+  storageBucket: "nggyu-26b8e.firebasestorage.app",
+  messagingSenderId: "27915937319",
+  appId: "1:27915937319:web:c6840f5c905864df9e9002",
+  measurementId: "G-BXB4TGGZV6"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+        // Referencja do dokumentu z licznikami
+        const countersDoc = db.collection("counters").doc("videoPageCounters");
+
         // Funkcja uruchamiana po załadowaniu strony
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.getElementById('myVideo');
@@ -113,51 +252,99 @@
             const heartCounter = document.getElementById('heartCounter');
             const visitCounter = document.getElementById('visitCounter');
             
-            // Licznik wejść (zapis w localStorage)
-            let visits = localStorage.getItem('pageVisits');
-            visits = visits ? parseInt(visits) + 1 : 1;
-            localStorage.setItem('pageVisits', visits);
-            visitCounter.textContent = visits;
+            // Sprawdź, czy użytkownik już dał serduszko (w localStorage)
+            const userHasLiked = localStorage.getItem("userHasLiked") === "true";
             
-            // Licznik serduszek (zapis w localStorage)
-            let hearts = localStorage.getItem('hearts') || 0;
-            heartCounter.textContent = hearts;
-            
-            // Aktualizacja ikony serduszka jeśli już kliknięto
-            if (parseInt(hearts) > 0) {
+            if (userHasLiked) {
                 heartButton.textContent = '❤️';
             }
             
+            // Pobierz aktualne liczniki z Firestore
+            countersDoc.get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    
+                    // Aktualizuj licznik serduszek
+                    heartCounter.textContent = data.hearts || 0;
+                    
+                    // Zwiększ licznik wejść
+                    const newVisits = (data.visits || 0) + 1;
+                    visitCounter.textContent = newVisits;
+                    
+                    // Aktualizuj licznik wejść w Firestore
+                    countersDoc.update({
+                        visits: newVisits
+                    }).catch((error) => {
+                        console.error("Błąd przy aktualizacji wejść: ", error);
+                    });
+                } else {
+                    // Jeśli dokument nie istnieje, utwórz go
+                    countersDoc.set({
+                        hearts: 0,
+                        visits: 1
+                    });
+                    visitCounter.textContent = 1;
+                    heartCounter.textContent = 0;
+                }
+            }).catch((error) => {
+                console.error("Błąd przy pobieraniu liczników: ", error);
+            });
+            
             // Obsługa kliknięcia serduszka
             heartButton.addEventListener('click', function() {
-                if (this.textContent === '🤍') {
-                    this.textContent = '❤️';
-                    hearts = parseInt(hearts) + 1;
-                    localStorage.setItem('hearts', hearts);
-                    heartCounter.textContent = hearts;
+                if (!userHasLiked) {
+                    // Utwórz animowane serduszko
+                    createHeartAnimation(event.clientX, event.clientY);
                     
-                    // Animacja serduszka
-                    this.style.transform = 'scale(1.5)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 300);
+                    // Zwiększ licznik serduszek w Firestore
+                    countersDoc.get().then((doc) => {
+                        const currentHearts = doc.data().hearts || 0;
+                        const newHearts = currentHearts + 1;
+                        
+                        countersDoc.update({
+                            hearts: newHearts
+                        }).then(() => {
+                            // Aktualizuj wyświetlany licznik
+                            heartCounter.textContent = newHearts;
+                            
+                            // Zapisz w localStorage, że użytkownik już dał serduszko
+                            localStorage.setItem("userHasLiked", "true");
+                            
+                            // Zmień ikonę serduszka
+                            heartButton.textContent = '❤️';
+                            
+                            // Animacja serduszka
+                            heartButton.style.transform = 'scale(1.5)';
+                            setTimeout(() => {
+                                heartButton.style.transform = 'scale(1)';
+                            }, 300);
+                        });
+                    });
                 }
             });
             
-            // Automatyczne uruchomienie dźwięku po kliknięciu na wideo
-            video.addEventListener('click', function() {
-                if (this.muted) {
-                    this.muted = false;
-                }
-            });
-            
-            // Próba automatycznego włączenia dźwięku (wymaga interakcji użytkownika)
-            document.body.addEventListener('click', function initAudio() {
+            // Automatyczne uruchomienie dźwięku po kliknięciu na stronę
+            document.addEventListener('click', function initAudio() {
                 if (video.muted) {
                     video.muted = false;
                 }
-                document.body.removeEventListener('click', initAudio);
+                document.removeEventListener('click', initAudio);
             });
+            
+            // Funkcja tworząca animowane serduszko
+            function createHeartAnimation(x, y) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('heart-animation');
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                document.body.appendChild(heart);
+                
+                // Usuń element po zakończeniu animacji
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
         });
     </script>
 </body>
