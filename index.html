@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Dodaj Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -149,17 +153,23 @@
             border-radius: 50px;
             cursor: pointer;
         }
+        #loading {
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body id="body">
     <!-- Nakładka startowa -->
     <div id="play-overlay">
         <button id="start-button" onclick="startExperience()">START</button>
+        <div id="loading">Ładowanie danych...</div>
     </div>
 
     <!-- Treść strony -->
     <div id="content" style="display:none">
-       
+        <h1>Magiczna Strona ❤️</h1>
 
         <!-- Kontener na wideo -->
         <div id="video-container">
@@ -171,7 +181,7 @@
 
         <div id="hearts-container"></div>
         
-        <button id="add-heart-btn" onclick="addHeart()">DAJ SERDUSZKO MORDECZKO❤️</button>
+        <button id="add-heart-btn" onclick="addHeart()">Dodaj serduszko ❤️</button>
 
         <!-- Liczniki na dole -->
         <div class="counters">
@@ -184,6 +194,44 @@
     </div>
 
     <script>
+        // Konfiguracja Firebase (WSTAW SWOJE DANE)
+        const firebaseConfig = {
+            apiKey: "TWOJ_API_KEY",
+            authDomain: "TWOJ_PROJEKT.firebaseapp.com",
+            databaseURL: "https://TWOJ_PROJEKT-default-rtdb.firebaseio.com",
+            projectId: "TWOJ_PROJEKT",
+            storageBucket: "TWOJ_PROJEKT.appspot.com",
+            messagingSenderId: "NUMER",
+            appId: "APP_ID"
+        };
+
+        // Inicjalizuj Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        // Referencje do danych
+        const visitsRef = database.ref('visits');
+        const heartsRef = database.ref('hearts');
+        
+        // Zmienne stanu
+        let userHeartGiven = localStorage.getItem('heartGiven') === 'true';
+        
+        // Pobierz dane liczników
+        visitsRef.on('value', (snapshot) => {
+            const visits = snapshot.val() || 0;
+            document.getElementById('visit-counter').textContent = visits;
+        });
+        
+        heartsRef.on('value', (snapshot) => {
+            const hearts = snapshot.val() || 0;
+            document.getElementById('heart-counter').textContent = hearts;
+        });
+        
+        // Ukryj ładowanie po 3 sekundach
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+        }, 3000);
+
         function startExperience() {
             // Ukryj nakładkę startową
             document.getElementById('play-overlay').style.display = 'none';
@@ -198,29 +246,26 @@
             const video = document.getElementById('main-video');
             video.muted = false;
             video.play()
-                .then(() => {
-                    console.log("Wideo odtwarza się z dźwiękiem");
-                })
+                .then(() => console.log("Wideo odtwarza się z dźwiękiem"))
                 .catch(error => {
-                    console.error("Błąd odtwarzania wideo:", error);
-                    // Jeśli nie uda się z dźwiękiem, spróbuj bez
+                    console.error("Błąd odtwarzania:", error);
                     video.muted = true;
                     video.play();
-                    alert("Dźwięk zablokowany. Kliknij przycisk dźwięku, aby odciszyć.");
                 });
 
             // Zwiększ licznik wejść
-            let visits = localStorage.getItem('visits') || 0;
-            visits++;
-            localStorage.setItem('visits', visits);
-            document.getElementById('visit-counter').textContent = visits;
-
-            // Pokaż aktualną liczbę serduszek
-            let hearts = localStorage.getItem('hearts') || 0;
-            document.getElementById('heart-counter').textContent = hearts;
+            visitsRef.transaction((currentVisits) => {
+                return (currentVisits || 0) + 1;
+            });
+            
+            // Ustaw przycisk serduszka
+            if (userHeartGiven) {
+                document.getElementById('add-heart-btn').disabled = true;
+                document.getElementById('add-heart-btn').textContent = "Dziękujemy!";
+            }
         }
 
-        // Automatyczne restartowanie wideo po zakończeniu
+        // Automatyczne restartowanie wideo
         document.getElementById('main-video').addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
@@ -235,24 +280,72 @@
 
         // Dodawanie serduszka
         function addHeart() {
-            let heartGiven = localStorage.getItem('heartGiven');
-            if (!heartGiven) {
-                let hearts = parseInt(localStorage.getItem('hearts') || 0) + 1;
-                localStorage.setItem('hearts', hearts);
+            if (!userHeartGiven) {
+                // Zwiększ globalny licznik
+                heartsRef.transaction((currentHearts) => {
+                    return (currentHearts || 0) + 1;
+                });
+                
+                // Oznacz użytkownika
+                userHeartGiven = true;
                 localStorage.setItem('heartGiven', 'true');
-                document.getElementById('heart-counter').textContent = hearts;
-
+                
+                // Dodaj serduszko w UI
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.innerHTML = '❤️';
                 heart.style.left = Math.random() * 80 + '%';
                 document.getElementById('hearts-container').appendChild(heart);
                 
-                // Wyłącz przycisk po użyciu
+                // Zaktualizuj przycisk
                 document.getElementById('add-heart-btn').disabled = true;
                 document.getElementById('add-heart-btn').textContent = "Dziękujemy!";
             }
         }
+    </script>
+// Konfiguracja
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOB45wtuF2suVO2Y7aWQrymzmVxLd_SlkeSolAZ135zP4zsJqR_XMamMdRfTB1gmoe/exec'; // Wklej swój URL
+
+        // Pobierz liczniki przy starcie
+        async function fetchCounters() {
+            const response = await fetch(`${SCRIPT_URL}?action=getCounters`);
+            const data = await response.json();
+            document.getElementById('visit-counter').textContent = data.visits;
+            document.getElementById('heart-counter').textContent = data.hearts;
+        }
+
+        // Zwiększ licznik wejść
+        async function incrementVisits() {
+            await fetch(`${SCRIPT_URL}?action=incrementVisits`, { method: 'POST' });
+            fetchCounters(); // Odśwież dane
+        }
+
+        // Zwiększ licznik serduszek
+        async function incrementHearts() {
+            await fetch(`${SCRIPT_URL}?action=incrementHearts`, { method: 'POST' });
+            fetchCounters(); // Odśwież dane
+        }
+
+        // Start doświadczenia (po kliknięciu START)
+        async function startExperience() {
+            // ... (twój istniejący kod) ...
+            await incrementVisits(); // Zwiększ wejścia przy starcie
+        }
+
+        // Dodaj serduszko
+        function addHeart() {
+            if (!localStorage.getItem('heartGiven')) {
+                incrementHearts();
+                // ... (twój istniejący kod dla animacji) ...
+                localStorage.setItem('heartGiven', 'true');
+            }
+        }
+
+        // Inicjalizacja
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchCounters(); // Pobierz aktualne liczniki
+            // ... (reszta inicjalizacji) ...
+        });
     </script>
 </body>
 </html>
