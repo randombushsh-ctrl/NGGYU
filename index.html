@@ -1,163 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Dodaj Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            animation: rainbow 2s infinite linear;
-        }
-        #content {
-            height: 100vh;
-            position: relative;
-        }
-        h1 {
-            color: white;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
-            font-size: 36px;
-            padding: 20px 0;
-            position: relative;
-            z-index: 5;
-            background: rgba(0,0,0,0.5);
-        }
-        #video-container {
-            position: absolute;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 200px);
-            z-index: 1;
-            overflow: hidden;
-        }
-        #main-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        #overlay {
-            position: absolute;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 200px);
-            z-index: 2;
-            background: rgba(0,0,0,0.3);
-            pointer-events: none;
-        }
-        #hearts-container {
-            position: absolute;
-            bottom: 100px;
-            left: 0;
-            width: 100%;
-            min-height: 80px;
-            z-index: 3;
-            padding: 10px;
-        }
-        .heart {
-            font-size: 36px;
-            margin: 5px;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
-            position: relative;
-            z-index: 4;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        .counters {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            display: flex;
-            justify-content: space-around;
-            font-weight: bold;
-            z-index: 5;
-            color: white;
-        }
-        .counter {
-            font-size: 22px;
-            color: #ff6b6b;
-        }
-        #add-heart-btn {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 10px;
-            font-size: 18px;
-            position: relative;
-            z-index: 4;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        @keyframes rainbow {
-            0% { background: #ff0000; }
-            14% { background: #ff7f00; }
-            28% { background: #ffff00; }
-            42% { background: #00ff00; }
-            57% { background: #0000ff; }
-            71% { background: #4b0082; }
-            85% { background: #9400d3; }
-            100% { background: #ff0000; }
-        }
-        #sound-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 100;
-        }
-        #play-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #start-button {
-            font-size: 32px;
-            padding: 20px 40px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-        #loading {
-            color: white;
-            font-size: 20px;
-            margin-top: 20px;
-        }
+        /* ... (Twój CSS pozostaje bez zmian) ... */
     </style>
 </head>
 <body id="body">
@@ -169,7 +14,7 @@
 
     <!-- Treść strony -->
     <div id="content" style="display:none">
-        <h1>Magiczna Strona ❤️</h1>
+        <h1>ELO MORDO</h1>
 
         <!-- Kontener na wideo -->
         <div id="video-container">
@@ -181,7 +26,7 @@
 
         <div id="hearts-container"></div>
         
-        <button id="add-heart-btn" onclick="addHeart()">Dodaj serduszko ❤️</button>
+        <button id="add-heart-btn" onclick="addHeart()">NO DAJ SERDUSZKO MORDO ❤️</button>
 
         <!-- Liczniki na dole -->
         <div class="counters">
@@ -194,45 +39,46 @@
     </div>
 
     <script>
-        // Konfiguracja Firebase (WSTAW SWOJE DANE)
-        const firebaseConfig = {
-            apiKey: "TWOJ_API_KEY",
-            authDomain: "TWOJ_PROJEKT.firebaseapp.com",
-            databaseURL: "https://TWOJ_PROJEKT-default-rtdb.firebaseio.com",
-            projectId: "TWOJ_PROJEKT",
-            storageBucket: "TWOJ_PROJEKT.appspot.com",
-            messagingSenderId: "NUMER",
-            appId: "APP_ID"
-        };
+        // KONFIGURACJA SKRYPTU GOOGLE
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOB45wtuF2suVO2Y7aWQrymzmVxLd_SlkeSolAZ135zP4zsJqR_XMamMdRfTB1gmoe/exec';
 
-        // Inicjalizuj Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-        
-        // Referencje do danych
-        const visitsRef = database.ref('visits');
-        const heartsRef = database.ref('hearts');
-        
-        // Zmienne stanu
-        let userHeartGiven = localStorage.getItem('heartGiven') === 'true';
-        
-        // Pobierz dane liczników
-        visitsRef.on('value', (snapshot) => {
-            const visits = snapshot.val() || 0;
-            document.getElementById('visit-counter').textContent = visits;
-        });
-        
-        heartsRef.on('value', (snapshot) => {
-            const hearts = snapshot.val() || 0;
-            document.getElementById('heart-counter').textContent = hearts;
-        });
-        
+        // Funkcje do obsługi liczników
+        async function fetchCounters() {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getCounters`);
+                const data = await response.json();
+                document.getElementById('visit-counter').textContent = data.visits;
+                document.getElementById('heart-counter').textContent = data.hearts;
+            } catch (error) {
+                console.error('Błąd pobierania liczników:', error);
+            }
+        }
+
+        async function incrementVisits() {
+            try {
+                await fetch(`${SCRIPT_URL}?action=incrementVisits`, { method: 'POST' });
+                await fetchCounters();
+            } catch (error) {
+                console.error('Błąd zwiększania wejść:', error);
+            }
+        }
+
+        async function incrementHearts() {
+            try {
+                await fetch(`${SCRIPT_URL}?action=incrementHearts`, { method: 'POST' });
+                await fetchCounters();
+            } catch (error) {
+                console.error('Błąd zwiększania serduszek:', error);
+            }
+        }
+
         // Ukryj ładowanie po 3 sekundach
         setTimeout(() => {
             document.getElementById('loading').style.display = 'none';
         }, 3000);
 
-        function startExperience() {
+        // Funkcja uruchamiana po kliknięciu START
+        async function startExperience() {
             // Ukryj nakładkę startową
             document.getElementById('play-overlay').style.display = 'none';
             
@@ -254,12 +100,10 @@
                 });
 
             // Zwiększ licznik wejść
-            visitsRef.transaction((currentVisits) => {
-                return (currentVisits || 0) + 1;
-            });
+            await incrementVisits();
             
-            // Ustaw przycisk serduszka
-            if (userHeartGiven) {
+            // Sprawdź, czy użytkownik już dodał serduszko
+            if (localStorage.getItem('heartGiven') === 'true') {
                 document.getElementById('add-heart-btn').disabled = true;
                 document.getElementById('add-heart-btn').textContent = "Dziękujemy!";
             }
@@ -279,15 +123,9 @@
         }
 
         // Dodawanie serduszka
-        function addHeart() {
-            if (!userHeartGiven) {
-                // Zwiększ globalny licznik
-                heartsRef.transaction((currentHearts) => {
-                    return (currentHearts || 0) + 1;
-                });
-                
-                // Oznacz użytkownika
-                userHeartGiven = true;
+        async function addHeart() {
+            if (localStorage.getItem('heartGiven') !== 'true') {
+                await incrementHearts();
                 localStorage.setItem('heartGiven', 'true');
                 
                 // Dodaj serduszko w UI
@@ -302,50 +140,9 @@
                 document.getElementById('add-heart-btn').textContent = "Dziękujemy!";
             }
         }
-    </script>
-// Konfiguracja
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOB45wtuF2suVO2Y7aWQrymzmVxLd_SlkeSolAZ135zP4zsJqR_XMamMdRfTB1gmoe/exec'; // Wklej swój URL
 
-        // Pobierz liczniki przy starcie
-        async function fetchCounters() {
-            const response = await fetch(`${SCRIPT_URL}?action=getCounters`);
-            const data = await response.json();
-            document.getElementById('visit-counter').textContent = data.visits;
-            document.getElementById('heart-counter').textContent = data.hearts;
-        }
-
-        // Zwiększ licznik wejść
-        async function incrementVisits() {
-            await fetch(`${SCRIPT_URL}?action=incrementVisits`, { method: 'POST' });
-            fetchCounters(); // Odśwież dane
-        }
-
-        // Zwiększ licznik serduszek
-        async function incrementHearts() {
-            await fetch(`${SCRIPT_URL}?action=incrementHearts`, { method: 'POST' });
-            fetchCounters(); // Odśwież dane
-        }
-
-        // Start doświadczenia (po kliknięciu START)
-        async function startExperience() {
-            // ... (twój istniejący kod) ...
-            await incrementVisits(); // Zwiększ wejścia przy starcie
-        }
-
-        // Dodaj serduszko
-        function addHeart() {
-            if (!localStorage.getItem('heartGiven')) {
-                incrementHearts();
-                // ... (twój istniejący kod dla animacji) ...
-                localStorage.setItem('heartGiven', 'true');
-            }
-        }
-
-        // Inicjalizacja
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchCounters(); // Pobierz aktualne liczniki
-            // ... (reszta inicjalizacji) ...
-        });
+        // Inicjalizacja: pobierz liczniki przy ładowaniu strony
+        document.addEventListener('DOMContentLoaded', fetchCounters);
     </script>
 </body>
 </html>
