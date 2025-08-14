@@ -1,65 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-    <title>Magiczna Strona ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elo mordeczko</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            animation: rainbow 2s infinite linear;
-            background: #000;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
-        #content {
-            height: 100vh;
-            position: relative;
-        }
-        h1 {
-            color: white;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
-            font-size: 36px;
-            padding: 20px 0;
-            position: relative;
-            z-index: 5;
-            background: rgba(0,0,0,0.5);
-        }
-        #video-container {
-            position: absolute;
-            top: 80px;
-            left: 0;
+        
+        .video-container {
             width: 100%;
-            height: calc(100% - 200px);
-            z-index: 1;
-            overflow: hidden;
+            max-width: 1200px;
+            margin: 20px 0;
+            position: relative;
         }
-        #main-video {
+
+        video {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: block;
         }
-        /* USUNIĘTO #overlay - PRZYCZYNĘ SZAREGO KWADRATU */
-        #hearts-container {
-            position: absolute;
-            bottom: 100px;
-            left: 0;
+
+        .content {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 1200px;
             width: 100%;
-            min-height: 80px;
-            z-index: 3;
-            padding: 10px;
+            margin-bottom: 20px;
         }
-        .heart {
-            font-size: 36px;
-            margin: 5px;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
-            position: relative;
-           
+
+        .heart-section {
+            margin: 20px 0;
+        }
+
+        .heart-request {
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            font-size: 24px;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .heart-btn {
+            background: none;
+            border: none;
+            font-size: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .counters {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .counter {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- Zastąp ścieżkę do pliku własnym filmem -->
+        <video id="myVideo" controls autoplay muted playsinline>
+            <source src="movie.mp4" type="video/mp4">
+            Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+        </video>
+    </div>
+
+    <div class="content">
+        <div class="heart-section">
+            <p class="heart-request">Zostaw serduszko pls❤️</p>
+            <button class="heart-btn" id="heartButton">🤍</button>
+            <div class="counters">
+                <div class="counter">Serduszka: <span id="heartCounter">0</span></div>
+                <div class="counter">Wejścia: <span id="visitCounter">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funkcja uruchamiana po załadowaniu strony
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('myVideo');
+            const heartButton = document.getElementById('heartButton');
+            const heartCounter = document.getElementById('heartCounter');
+            const visitCounter = document.getElementById('visitCounter');
+            
+            // Licznik wejść (zapis w localStorage)
+            let visits = localStorage.getItem('pageVisits');
+            visits = visits ? parseInt(visits) + 1 : 1;
+            localStorage.setItem('pageVisits', visits);
+            visitCounter.textContent = visits;
+            
+            // Licznik serduszek (zapis w localStorage)
+            let hearts = localStorage.getItem('hearts') || 0;
+            heartCounter.textContent = hearts;
+            
+            // Aktualizacja ikony serduszka jeśli już kliknięto
+            if (parseInt(hearts) > 0) {
+                heartButton.textContent = '❤️';
+            }
+            
+            // Obsługa kliknięcia serduszka
+            heartButton.addEventListener('click', function() {
+                if (this.textContent === '🤍') {
+                    this.textContent = '❤️';
+                    hearts = parseInt(hearts) + 1;
+                    localStorage.setItem('hearts', hearts);
+                    heartCounter.textContent = hearts;
+                    
+                    // Animacja serduszka
+                    this.style.transform = 'scale(1.5)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+            
+            // Automatyczne uruchomienie dźwięku po kliknięciu na wideo
+            video.addEventListener('click', function() {
+                if (this.muted) {
+                    this.muted = false;
+                }
+            });
+            
+            // Próba automatycznego włączenia dźwięku (wymaga interakcji użytkownika)
+            document.body.addEventListener('click', function initAudio() {
+                if (video.muted) {
+                    video.muted = false;
+                }
+                document.body.removeEventListener('click', initAudio);
+            });
+        });
+    </script>
+</body>
+</html>
