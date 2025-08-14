@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ELO ELO 320</title>
+    <title>ELO ELO 3 2 0</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            animation: rainbow 10s infinite linear;
+            background: white; /* Białe tło na start */
             height: 100vh;
             overflow: hidden;
+            transition: all 0.5s;
         }
-        @keyframes rainbow {
-            0% { background: #ff0000; }
-            14% { background: #ff7f00; }
-            28% { background: #ffff00; }
-            42% { background: #00ff00; }
-            57% { background: #0000ff; }
-            71% { background: #4b0082; }
-            85% { background: #9400d3; }
-            100% { background: #ff0000; }
+        #play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            padding: 15px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        #content {
+            display: none; /* Ukryte na start */
         }
         #gif-container {
             margin: 20px auto;
@@ -28,15 +35,9 @@
             margin: 30px auto;
             max-width: 500px;
             min-height: 200px;
-            border: 2px dashed white;
+            border: 2px dashed #ff6b6b;
             padding: 10px;
             background: rgba(255, 255, 255, 0.3);
-        }
-        #heart-button {
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
         }
         .heart {
             font-size: 24px;
@@ -48,41 +49,86 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
+        .counter {
+            font-size: 20px;
+            margin: 10px;
+            color: #ff6b6b;
+        }
+        .rainbow-bg {
+            animation: rainbow 10s infinite linear;
+        }
+        @keyframes rainbow {
+            0% { background: #ff0000; }
+            14% { background: #ff7f00; }
+            28% { background: #ffff00; }
+            42% { background: #00ff00; }
+            57% { background: #0000ff; }
+            71% { background: #4b0082; }
+            85% { background: #9400d3; }
+            100% { background: #ff0000; }
+        }
     </style>
 </head>
-<body>
-    <h1>POLUB MORDECZKO</h1>
-    
-    <div id="gif-container">
-        <!-- Tutaj wstaw swój gif -->
-        <img src="loop.gif" alt="Animacja" width="300" loop>
+<body id="body">
+    <!-- Etap 1: Przycisk PLAY -->
+    <button id="play-button" onclick="startExperience()">▶️ PLAY</button>
+
+    <!-- Etap 2: Treść po kliknięciu PLAY -->
+    <div id="content">
+        <h1>DAJ SERDUSZKO MORDECZKO❤️</h1>
+        
+        <div class="counter">Liczba wejść: <span id="visit-counter">0</span></div>
+        <div class="counter">Serduszka: <span id="heart-counter">0</span></div>
+
+        <div id="gif-container">
+            <img src="loop.gif" alt="Animacja" width="300" loop>
+        </div>
+
+        <div id="hearts-container"></div>
+
+        <audio id="bg-music" loop>
+            <source src="background.mp3" type="audio/mp3">
+        </audio>
     </div>
-
-    <div id="hearts-container">
-        <!-- SERDUSZKA -->
-    </div>
-
-    <button id="heart-button" onclick="addHeart()">❤️ NO KLIKNIJ NO!</button>
-
-    <!-- Audio w tle (automatyczne odtwarzanie) -->
-    <audio autoplay loop>
-        <source src="background.mp3" type="audio/mp3">
-        Twoja przeglądarka nie obsługuje audio.
-    </audio>
 
     <script>
-        // Dodawanie serduszek
-        function addHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 80 + '%';
-            heart.style.top = Math.random() * 80 + '%';
-            document.getElementById('hearts-container').appendChild(heart);
+        // Funkcja uruchamiana po kliknięciu PLAY
+        function startExperience() {
+            // Ukryj przycisk, pokaż treść
+            document.getElementById('play-button').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('body').classList.add('rainbow-bg');
+
+            // Odtwórz muzykę
+            document.getElementById('bg-music').play();
+
+            // Zwiększ licznik wejść (zapis w localStorage)
+            let visits = localStorage.getItem('visits') || 0;
+            visits++;
+            localStorage.setItem('visits', visits);
+            document.getElementById('visit-counter').textContent = visits;
+
+            // Licznik serduszek
+            let hearts = localStorage.getItem('hearts') || 0;
+            document.getElementById('heart-counter').textContent = hearts;
         }
 
-        // Automatyczne dodawanie serduszek co 3 sekundy (opcjonalne)
-        setInterval(addHeart, 3000);
+        // Dodawanie serduszka (1 na użytkownika)
+        document.getElementById('hearts-container').onclick = function() {
+            let heartGiven = localStorage.getItem('heartGiven');
+            if (!heartGiven) {
+                let hearts = parseInt(localStorage.getItem('hearts') || 0) + 1;
+                localStorage.setItem('hearts', hearts);
+                localStorage.setItem('heartGiven', 'true');
+                document.getElementById('heart-counter').textContent = hearts;
+
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 80 + '%';
+                this.appendChild(heart);
+            }
+        };
     </script>
 </body>
 </html>
