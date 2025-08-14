@@ -3,76 +3,90 @@
 <head>
     <title>ELO MORDECZKO</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
             background: white;
             height: 100vh;
             overflow: hidden;
             transition: all 0.5s;
-        }
-        #play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            padding: 15px 30px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            z-index: 10;
+            position: relative;
+            animation: rainbow 2s infinite linear;
         }
         #content {
-            display: none;
+            height: 100vh;
+            position: relative;
         }
         h1 {
             color: white;
-            text-shadow: 0 0 5px black, 0 0 10px black;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
             font-size: 36px;
-            margin: 20px 0;
+            padding: 20px 0;
+            position: relative;
+            z-index: 5;
+            background: rgba(0,0,0,0.5);
         }
         #video-container {
-            margin: 10px auto;
+            position: absolute;
+            top: 80px; /* Zostawiamy miejsce na tytuł */
+            left: 0;
             width: 100%;
-            max-width: 800px;
+            height: calc(100% - 200px); /* Miejsce na serduszka i liczniki */
+            z-index: 1;
         }
         #main-video {
-            width: 90%;
-            max-width: 600px;
-            border: 5px solid white;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #overlay {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 200px);
+            z-index: 2;
+            background: rgba(0,0,0,0.3);
         }
         #hearts-container {
-            margin: 20px auto;
-            min-height: 100px;
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+            min-height: 80px;
+            z-index: 3;
+            padding: 10px;
         }
         .heart {
-            font-size: 28px;
+            font-size: 36px;
             margin: 5px;
             display: inline-block;
             animation: float 3s ease-in-out infinite;
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 4;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
         .counters {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.7);
             padding: 15px;
             display: flex;
             justify-content: space-around;
             font-weight: bold;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            z-index: 5;
+            color: white;
         }
         .counter {
             font-size: 22px;
@@ -85,12 +99,11 @@
             padding: 12px 25px;
             border-radius: 50px;
             cursor: pointer;
-            margin: 15px;
+            margin: 10px;
             font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .rainbow-bg {
-            animation: rainbow 2s infinite linear;
+            position: relative;
+            z-index: 4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         @keyframes rainbow {
             0% { background: #ff0000; }
@@ -115,77 +128,56 @@
             cursor: pointer;
             z-index: 100;
         }
-        .video-controls {
-            margin-top: 10px;
-        }
-        .video-controls button {
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body id="body">
-    <!-- Przycisk PLAY na start -->
-    <button id="play-button" onclick="startExperience()">▶️ PLAY</button>
-
-    <!-- Przycisk do dźwięku -->
-    <button id="sound-button" style="display: none;" onclick="toggleSound()">🔇</button>
-
-    <!-- Treść po kliknięciu PLAY -->
+    <!-- Treść strony -->
     <div id="content">
         <h1>ELO MORDECZKO</h1>
 
+        <!-- Kontener na wideo -->
         <div id="video-container">
-            <video id="main-video" controls loop>
+            <video id="main-video" playsinline autoplay muted loop>
                 <source src="movie.mp4" type="video/mp4">
-                Twoja przeglądarka nie obsługuje wideo.
             </video>
-            <div class="video-controls">
-                <button onclick="document.getElementById('main-video').play()">▶️ Odtwarzaj</button>
-                <button onclick="document.getElementById('main-video').pause()">⏸️ Pauza</button>
-            </div>
+            <div id="overlay"></div>
         </div>
 
         <div id="hearts-container"></div>
         
-        <button id="add-heart-btn" onclick="addHeart()">DAJ SERDUSZKO MORDECZKO❤️</button>
+        <button id="add-heart-btn" onclick="addHeart()">DAJ SERDUSZKO BROOO❤️</button>
 
         <!-- Liczniki na dole -->
         <div class="counters">
             <div class="counter">Wejścia: <span id="visit-counter">0</span></div>
             <div class="counter">Serduszka: <span id="heart-counter">0</span></div>
         </div>
+
+        <!-- Przycisk dźwięku -->
+        <button id="sound-button" onclick="toggleSound()">🔇</button>
     </div>
 
     <script>
-        // Funkcja uruchamiana po kliknięciu PLAY
-        function startExperience() {
-            // Ukryj przycisk, pokaż treść
-            document.getElementById('play-button').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
+        // Start experience immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start rainbow background
             document.getElementById('body').classList.add('rainbow-bg');
-            document.getElementById('sound-button').style.display = 'block';
-
-            // Uruchom wideo
+            
+            // Start video
             const video = document.getElementById('main-video');
-            video.play().catch(e => {
-                console.log("Automatyczne odtwarzanie wideo zablokowane");
+            video.play().catch(error => {
+                console.log("Autoodtwarzanie zablokowane, wymagana interakcja");
             });
 
-            // Zwiększ licznik wejść
+            // Initialize counters
             let visits = localStorage.getItem('visits') || 0;
             visits++;
             localStorage.setItem('visits', visits);
             document.getElementById('visit-counter').textContent = visits;
 
-            // Pokaż aktualną liczbę serduszek
             let hearts = localStorage.getItem('hearts') || 0;
             document.getElementById('heart-counter').textContent = hearts;
-        }
+        });
 
         // Funkcja włączająca/wyłączająca dźwięk
         function toggleSound() {
@@ -214,6 +206,12 @@
                 document.getElementById('add-heart-btn').textContent = "Dziękujemy!";
             }
         }
+
+        // Automatyczne restartowanie wideo po zakończeniu
+        document.getElementById('main-video').addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
     </script>
 </body>
 </html>
