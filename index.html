@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0066, #ff00cc, #ff33ff, #cc00ff, #ff1493, #00ced1);
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0066, #ff00cc, #ff33ff, #cc00ff);
             background-size: 2000% 2000%;
             animation: rainbow 2s linear infinite;
             min-height: 100vh;
@@ -19,6 +19,8 @@
             align-items: center;
             color: white;
             overflow-x: hidden;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         @keyframes rainbow {
@@ -30,31 +32,32 @@
         /* Kontener główny */
         .container {
             max-width: 1200px;
-            width: 95%;
+            width: 100%;
             margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 25px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            padding: 40px;
+            padding: 30px;
             text-align: center;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
             position: relative;
             z-index: 10;
-            border: 4px solid rgba(255, 255, 255, 0.25);
+            border: 4px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Nagłówek */
         header {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
             text-shadow: 0 5px 10px rgba(0,0,0,0.8);
             color: #ffec8b;
             letter-spacing: 1.5px;
             text-transform: uppercase;
+            line-height: 1.2;
         }
 
         /* Kontener wideo */
@@ -62,12 +65,12 @@
             position: relative;
             width: 100%;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 12px 30px rgba(0,0,0,0.9);
-            margin: 0 auto 40px;
+            margin: 0 auto 30px;
             background: #000;
-            border: 6px solid rgba(255, 255, 255, 0.2);
+            border: 5px solid rgba(255, 255, 255, 0.15);
         }
 
         video {
@@ -83,26 +86,26 @@
 
         /* Sekcja serduszka */
         .heart-section {
-            margin: 40px 0;
-            padding: 35px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            border: 3px dashed rgba(255, 255, 255, 0.35);
+            margin: 30px 0;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
         }
 
         .heart-request {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: #ffb3b3;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             text-shadow: 0 4px 8px rgba(0,0,0,0.7);
             font-weight: bold;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .heart-btn {
             background: none;
             border: none;
-            font-size: 6rem;
+            font-size: 5rem;
             cursor: pointer;
             transition: all 0.4s ease;
             margin: 0 15px;
@@ -125,33 +128,33 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 60px;
-            margin-top: 40px;
-            font-size: 1.8rem;
+            gap: 30px;
+            margin-top: 30px;
+            font-size: 1.6rem;
         }
 
         .counter {
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffb6b6, #ffd6d6);
-            padding: 25px 40px;
-            border-radius: 70px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffb6b6);
+            padding: 20px 35px;
+            border-radius: 60px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            min-width: 260px;
+            min-width: 240px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 4px solid rgba(255, 255, 255, 0.35);
+            border: 3px solid rgba(255, 255, 255, 0.3);
         }
 
         .counter-number {
-            font-size: 3.8rem;
+            font-size: 3.2rem;
             font-weight: bold;
-            margin-top: 15px;
+            margin-top: 10px;
             text-shadow: 0 4px 8px rgba(0,0,0,0.7);
             color: #fff;
         }
 
         .counter-label {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #5a0000;
             text-transform: uppercase;
@@ -182,68 +185,123 @@
 
         /* Stopka */
         footer {
-            margin-top: 50px;
-            padding: 25px;
-            font-size: 1.3rem;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.9);
             background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
+            border-radius: 15px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
-        /* Responsywność */
+        /* Responsywność - poprawki dla telefonów */
         @media (max-width: 1000px) {
-            .counters {
-                gap: 35px;
-            }
-            
-            .counter {
-                min-width: 220px;
-                padding: 20px 30px;
-            }
-            
-            .heart-request {
-                font-size: 2.3rem;
-            }
-            
             h1 {
-                font-size: 3rem;
-            }
-            
-            .heart-btn {
-                font-size: 5rem;
-            }
-        }
-        
-        @media (max-width: 700px) {
-            .counters {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .counter {
-                width: 100%;
-                max-width: 350px;
-                margin: 0 auto;
+                font-size: 2.5rem;
             }
             
             .heart-request {
                 font-size: 2rem;
             }
             
-            h1 {
-                font-size: 2.5rem;
-            }
-            
             .heart-btn {
                 font-size: 4.5rem;
             }
-            
+        }
+        
+        @media (max-width: 768px) {
             .container {
-                padding: 30px 20px;
+                padding: 20px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .heart-request {
+                font-size: 1.8rem;
+            }
+            
+            .heart-btn {
+                font-size: 4rem;
+            }
+            
+            .counter {
+                min-width: 200px;
+                padding: 15px 25px;
+            }
+            
+            .counter-label {
+                font-size: 1.4rem;
+            }
+            
+            .counter-number {
+                font-size: 2.8rem;
             }
         }
         
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .heart-request {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .heart-btn {
+                font-size: 3.5rem;
+            }
+            
+            .counters {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .counter {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                padding: 15px 20px;
+            }
+            
+            .counter-label {
+                font-size: 1.3rem;
+            }
+            
+            .counter-number {
+                font-size: 2.5rem;
+            }
+            
+            footer {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .heart-request {
+                font-size: 1.3rem;
+            }
+            
+            .heart-btn {
+                font-size: 3rem;
+            }
+        }
+
         /* Animowane elementy w tle */
         .bg-animation {
             position: fixed;
@@ -259,7 +317,7 @@
         .bg-element {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             animation: float 15s infinite linear;
             z-index: -1;
         }
@@ -274,8 +332,8 @@
         }
         
         .loading {
-            font-size: 1.6rem;
-            margin: 25px 0;
+            font-size: 1.4rem;
+            margin: 20px 0;
             color: #ffdf00;
             font-weight: bold;
             text-shadow: 0 3px 6px rgba(0,0,0,0.6);
@@ -284,60 +342,29 @@
         
         .unlock-audio {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(to right, #ff6b6b, #ff3366);
             color: white;
-            padding: 15px 30px;
-            border-radius: 60px;
+            padding: 12px 25px;
+            border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             border: none;
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             z-index: 20;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
             font-family: 'Comic Sans MS', 'Comic Sans', cursive;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
         
         .unlock-audio:hover {
             background: linear-gradient(to right, #ff3366, #ff0066);
             transform: translateX(-50%) scale(1.15);
             box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
-        }
-        
-        .firebase-info {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
-            text-align: left;
-            font-size: 1.1rem;
-        }
-        
-        .firebase-info h3 {
-            color: #ffcc00;
-            margin-top: 0;
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 10px;
-        }
-        
-        .firebase-info ol {
-            padding-left: 20px;
-        }
-        
-        .firebase-info li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        .firebase-info code {
-            background: #222;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #ff9966;
         }
     </style>
     
@@ -351,19 +378,19 @@
     
     <div class="container">
         <header>
-            <h1>ELOO</h1>
+            <h1>ELOOOO</h1>
         </header>
         
         <div class="video-container">
             <!-- Film z dysku - zmień ścieżkę na swój plik -->
-            <video id="myVideo" controls autoplay playsinline>
+            <video id="myVideo" controls autoplay playsinline loop>
                 <source src="movie.mp4" type="video/mp4">
                 Twoja przeglądarka nie obsługuje odtwarzacza wideo.
             </video>
         </div>
 
         <div class="heart-section">
-            <p class="heart-request">ZOSTAW SERDUSZKO MORDECZKO<br>Każdy może dać tylko jedno na urządzenie!</p>
+            <p class="heart-request">❤DAJ SERDUSZKO BROOO<br></p>
             <button class="heart-btn" id="heartButton">🤍</button>
             <div class="counters">
                 <div class="counter">
@@ -375,27 +402,11 @@
                     <span class="counter-number" id="visitCounter">0</span>
                 </div>
             </div>
-            <div class="loading" id="loading">Ładowanie globalnych liczników z bazy danych...</div>
-        </div>
-        
-        <div class="firebase-info">
-            <h3>Konfiguracja Firebase:</h3>
-            <ol>
-                <li>Przejdź na <a href="https://firebase.google.com/" target="_blank" style="color: #ffcc00;">Firebase Console</a> i utwórz nowy projekt</li>
-                <li>Włącz Firestore Database w trybie testowym</li>
-                <li>Dodaj aplikację internetową i skopiuj konfigurację</li>
-                <li>Wklej swoją konfigurację w miejsce oznaczone w kodzie poniżej:</li>
-                <li>Utwórz kolekcję "counters" i dokument "globalCounters" z polami:
-                    <ul>
-                        <li><code>hearts</code> (liczba)</li>
-                        <li><code>visits</code> (liczba)</li>
-                    </ul>
-                </li>
-            </ol>
+            <div class="loading" id="loading">Ładowanie globalnych liczników...</div>
         </div>
         
         <footer>
-            <p>Pozdro dla ziomali SIMC0942475 | Liczniki aktualizowane globalnie dla całego świata</p>
+            <p>Pozdro mordo</p>
         </footer>
     </div>
 
@@ -426,15 +437,15 @@
                 '#00bbf9', '#9b5de5', '#f15bb5', '#fee440', '#00f5d4'
             ];
             
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 40; i++) {
                 const element = document.createElement('div');
                 element.classList.add('bg-element');
                 
                 // Losowe właściwości
-                const size = Math.random() * 200 + 40;
+                const size = Math.random() * 150 + 30;
                 const left = Math.random() * 100;
                 const animationDuration = Math.random() * 20 + 8;
-                const opacity = Math.random() * 0.3 + 0.1;
+                const opacity = Math.random() * 0.25 + 0.1;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 element.style.width = `${size}px`;
@@ -460,6 +471,9 @@
             // Utwórz animowane tło
             createBackgroundAnimation();
             
+            // Ustaw wideo w pętli
+            video.loop = true;
+            
             // Włącz dźwięk automatycznie
             try {
                 video.muted = false;
@@ -468,7 +482,7 @@
                     // Dodaj przycisk do odblokowania dźwięku
                     const unlockButton = document.createElement('button');
                     unlockButton.className = 'unlock-audio';
-                    unlockButton.textContent = 'KLIKNIJ TUTAJ, ABY ODTWORZYĆ DŹWIĘK';
+                    unlockButton.textContent = 'KLIKNIJ';
                     unlockButton.addEventListener('click', () => {
                         video.play();
                         unlockButton.style.display = 'none';
@@ -495,37 +509,60 @@
                     // Aktualizuj licznik serduszek
                     heartCounter.textContent = data.hearts || 0;
                     
-                    // Zwiększ licznik wejść
-                    const newVisits = (data.visits || 0) + 1;
-                    visitCounter.textContent = newVisits;
+                    // Aktualizuj licznik wejść
+                    visitCounter.textContent = data.visits || 0;
                     
-                    // Aktualizuj licznik wejść w Firestore
-                    countersDoc.update({
-                        visits: firebase.firestore.FieldValue.increment(1)
-                    }).catch((error) => {
-                        console.error("Błąd przy aktualizacji wejść: ", error);
-                        loading.textContent = "Błąd aktualizacji wejść. Spróbuj odświeżyć stronę.";
-                    });
+                    // Ukryj komunikaty ładowania
+                    loading.textContent = "Liczniki załadowane poprawnie!";
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 2000);
                 } else {
                     // Jeśli dokument nie istnieje, utwórz go
                     countersDoc.set({
                         hearts: 0,
-                        visits: 1
+                        visits: 0
                     });
-                    visitCounter.textContent = 1;
                     heartCounter.textContent = 0;
+                    visitCounter.textContent = 0;
+                    
+                    loading.textContent = "Utworzono nowe liczniki!";
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 2000);
                 }
-                
-                // Ukryj komunikaty ładowania
-                loading.textContent = "Liczniki załadowane poprawnie!";
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 2000);
             }).catch((error) => {
                 console.error("Błąd przy pobieraniu liczników: ", error);
                 loading.textContent = "Błąd połączenia z bazą danych. Odśwież stronę.";
                 loading.style.color = '#ff6b6b';
             });
+            
+            // Funkcja do aktualizacji licznika wejść
+            function updateVisitCounter() {
+                countersDoc.get().then((doc) => {
+                    if (doc.exists) {
+                        const currentVisits = doc.data().visits || 0;
+                        countersDoc.update({
+                            visits: currentVisits + 1
+                        }).then(() => {
+                            visitCounter.textContent = currentVisits + 1;
+                        });
+                    } else {
+                        countersDoc.set({
+                            visits: 1,
+                            hearts: 0
+                        });
+                        visitCounter.textContent = 1;
+                    }
+                });
+            }
+            
+            // Aktualizuj licznik wejść tylko raz na sesję
+            const visitUpdated = sessionStorage.getItem('visitUpdated');
+            if (!visitUpdated) {
+                updateVisitCounter();
+                sessionStorage.setItem('visitUpdated', 'true');
+            }
             
             // Obsługa kliknięcia serduszka
             heartButton.addEventListener('click', function() {
@@ -535,15 +572,13 @@
                     loading.style.display = 'block';
                     
                     // Zwiększ licznik serduszek w Firestore
-                    countersDoc.update({
-                        hearts: firebase.firestore.FieldValue.increment(1)
-                    }).then(() => {
-                        // Pobierz zaktualizowaną wartość
-                        return countersDoc.get();
-                    }).then((doc) => {
-                        if (doc.exists) {
-                            const newHearts = doc.data().hearts;
-                            
+                    countersDoc.get().then((doc) => {
+                        const currentHearts = doc.data().hearts || 0;
+                        const newHearts = currentHearts + 1;
+                        
+                        countersDoc.update({
+                            hearts: newHearts
+                        }).then(() => {
                             // Aktualizuj wyświetlany licznik
                             heartCounter.textContent = newHearts;
                             
@@ -564,12 +599,12 @@
                             createHeartAnimations(event.clientX, event.clientY);
                             
                             // Pokaż potwierdzenie
-                            loading.textContent = "DZIĘKI BRO";
+                            loading.textContent = "DZIĘKI MORDECZKO❤️";
                             loading.style.color = '#ffdf00';
                             setTimeout(() => {
                                 loading.style.display = 'none';
                             }, 2000);
-                        }
+                        });
                     }).catch((error) => {
                         console.error("Błąd przy aktualizacji serduszek: ", error);
                         loading.textContent = "Błąd zapisu serduszka. Spróbuj ponownie.";
@@ -580,7 +615,7 @@
             
             // Funkcja tworząca animowane serduszka
             function createHeartAnimations(x, y) {
-                const heartsCount = 7;
+                const heartsCount = 5;
                 for (let i = 0; i < heartsCount; i++) {
                     setTimeout(() => {
                         const heart = document.createElement('div');
@@ -588,7 +623,7 @@
                         heart.classList.add('heart-animation');
                         
                         // Losowe przesunięcie
-                        const offsetX = (Math.random() - 0.5) * 200;
+                        const offsetX = (Math.random() - 0.5) * 150;
                         const offsetY = (Math.random() - 0.5) * 100;
                         
                         heart.style.left = `${x + offsetX}px`;
@@ -602,7 +637,7 @@
                         setTimeout(() => {
                             heart.remove();
                         }, 2000);
-                    }, i * 150);
+                    }, i * 200);
                 }
             }
         });
