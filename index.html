@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkIbIdI</title>
+    <title>sKiBiDi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Szybko zmieniające się tęczowe tło */
+        /* Styl retro z 2010 - krzykliwy i memiczny */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0066, #ff00cc, #ff33ff, #cc00ff);
-            background-size: 2000% 2000%;
-            animation: rainbow 2s linear infinite;
+            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+            background-size: 400% 400%;
+            animation: rainbow 5s ease infinite;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
+            color: #000;
             overflow-x: hidden;
-            padding: 20px;
-            box-sizing: border-box;
+            text-align: center;
         }
 
         @keyframes rainbow {
@@ -29,48 +26,60 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Kontener główny */
         .container {
-            max-width: 1200px;
-            width: 100%;
+            max-width: 1000px;
+            width: 95%;
             margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.85);
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            text-align: center;
-            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 10px solid #ff00ff;
+            border-radius: 0;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
             position: relative;
             z-index: 10;
-            border: 4px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Nagłówek */
+        /* Nagłówek w stylu lata 2010 */
         header {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+            padding: 20px;
+            border: 5px dashed #000;
+            border-radius: 20px;
+            transform: rotate(-2deg);
         }
 
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            text-shadow: 0 5px 10px rgba(0,0,0,0.8);
-            color: #ffec8b;
-            letter-spacing: 1.5px;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 #ff00ff, 6px 6px 0 #00ffff;
+            color: #000;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            line-height: 1.2;
+            font-weight: 900;
+            -webkit-text-stroke: 2px #000;
+            text-stroke: 2px #000;
         }
 
-        /* Kontener wideo */
+        .subtitle {
+            font-size: 2rem;
+            color: #000;
+            text-shadow: 2px 2px 0 #ff00ff;
+            margin-bottom: 20px;
+        }
+
+        /* Kontener wideo w starym stylu */
         .video-container {
             position: relative;
             width: 100%;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            border-radius: 15px;
+            border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.9);
             margin: 0 auto 30px;
             background: #000;
-            border: 5px solid rgba(255, 255, 255, 0.15);
+            border: 15px ridge #ffcc00;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            transform: rotate(1deg);
         }
 
         video {
@@ -81,93 +90,100 @@
             height: 100%;
             border: none;
             outline: none;
-            object-fit: cover;
         }
 
-        /* Sekcja serduszka */
+        /* Sekcja serduszka - bardzo krzykliwa */
         .heart-section {
             margin: 30px 0;
             padding: 25px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            border: 8px dotted #ff0000;
+            border-radius: 50px;
+            transform: rotate(2deg);
         }
 
         .heart-request {
-            font-size: 2.2rem;
-            color: #ffb3b3;
+            font-size: 2.5rem;
+            color: #000;
             margin-bottom: 25px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.7);
+            text-shadow: 3px 3px 0 #ffff00;
             font-weight: bold;
             line-height: 1.4;
+            text-transform: uppercase;
         }
 
         .heart-btn {
-            background: none;
-            border: none;
-            font-size: 5rem;
+            background: radial-gradient(circle, #ff0000, #ff6600);
+            border: 5px solid #ffff00;
+            font-size: 6rem;
             cursor: pointer;
-            transition: all 0.4s ease;
-            margin: 0 15px;
-            filter: drop-shadow(0 8px 10px rgba(0,0,0,0.7));
-            transform: scale(1);
+            margin: 0 10px;
+            padding: 0 30px;
+            border-radius: 50%;
+            box-shadow: 0 10px 0 #cc0000;
+            transition: all 0.1s ease;
+            transform: rotate(-5deg);
         }
 
-        .heart-btn:hover {
-            transform: scale(1.25) rotate(8deg);
-            filter: drop-shadow(0 10px 15px rgba(255, 0, 0, 0.6));
+        .heart-btn:active {
+            box-shadow: 0 5px 0 #cc0000;
+            transform: translateY(5px) rotate(-5deg);
         }
 
         .heart-btn.liked {
+            background: radial-gradient(circle, #ff0066, #ff0000);
             cursor: default;
-            color: #ff3366;
         }
 
-        /* Liczniki */
+        /* Liczniki w starym stylu */
         .counters {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 40px;
             margin-top: 30px;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         .counter {
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffb6b6);
-            padding: 20px 35px;
-            border-radius: 60px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            min-width: 240px;
+            background: linear-gradient(135deg, #00ffff, #00ff00);
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0 #000;
+            min-width: 200px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 5px solid #0000ff;
+            transform: rotate(-1deg);
         }
 
         .counter-number {
-            font-size: 3.2rem;
+            font-size: 4rem;
             font-weight: bold;
-            margin-top: 10px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.7);
-            color: #fff;
+            margin-top: 5px;
+            color: #ff0000;
+            text-shadow: 2px 2px 0 #000;
+            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
         }
 
         .counter-label {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #5a0000;
+            color: #000;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 1px 1px 0 #ffff00;
         }
 
-        /* Animowane serduszko */
+        /* Animowane serduszka */
         .heart-animation {
             position: absolute;
             pointer-events: none;
             font-size: 3rem;
             animation: heartFloat 2s ease-out forwards;
             z-index: 100;
+            text-shadow: 2px 2px 0 #000;
         }
 
         @keyframes heartFloat {
@@ -187,80 +203,39 @@
         footer {
             margin-top: 40px;
             padding: 20px;
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            font-size: 1.5rem;
+            color: #000;
+            background: linear-gradient(to right, #ffff00, #ff9900);
+            border: 5px solid #ff0000;
+            border-radius: 10px;
+            text-shadow: 1px 1px 0 #fff;
+            transform: rotate(-2deg);
         }
 
-        /* Responsywność - poprawki dla telefonów */
-        @media (max-width: 1000px) {
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                width: 90%;
+            }
+            
             h1 {
                 font-size: 2.5rem;
+                -webkit-text-stroke: 1px #000;
+                text-stroke: 1px #000;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
             }
             
             .heart-request {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .heart-btn {
                 font-size: 4.5rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                border-radius: 15px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .heart-request {
-                font-size: 1.8rem;
-            }
-            
-            .heart-btn {
-                font-size: 4rem;
-            }
-            
-            .counter {
-                min-width: 200px;
-                padding: 15px 25px;
-            }
-            
-            .counter-label {
-                font-size: 1.4rem;
-            }
-            
-            .counter-number {
-                font-size: 2.8rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .heart-request {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-            
-            .heart-btn {
-                font-size: 3.5rem;
+                padding: 0 20px;
             }
             
             .counters {
@@ -269,41 +244,25 @@
             }
             
             .counter {
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-                padding: 15px 20px;
+                min-width: 200px;
+                padding: 10px 20px;
             }
             
             .counter-label {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             
             .counter-number {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             footer {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
         }
         
-        @media (max-width: 400px) {
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            .heart-request {
-                font-size: 1.3rem;
-            }
-            
-            .heart-btn {
-                font-size: 3rem;
-            }
-        }
-
-        /* Animowane elementy w tle */
-        .bg-animation {
+        /* Animowane tło - stare gify */
+        .retro-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -311,33 +270,38 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            overflow: hidden;
+            opacity: 0.3;
         }
         
-        .bg-element {
+        .retro-element {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            animation: float 15s infinite linear;
+            font-size: 3rem;
+            animation: float 10s infinite linear;
             z-index: -1;
+            opacity: 0.5;
+            text-shadow: 2px 2px 0 #000;
         }
         
         @keyframes float {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg);
             }
             100% {
-                transform: translateY(-1200px) rotate(720deg);
+                transform: translateY(-100px) rotate(360deg);
             }
         }
         
         .loading {
-            font-size: 1.4rem;
+            font-size: 2rem;
             margin: 20px 0;
-            color: #ffdf00;
+            color: #ff0000;
             font-weight: bold;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+            text-shadow: 2px 2px 0 #ffff00;
             min-height: 30px;
+            background: #000;
+            padding: 10px;
+            border: 3px dashed #ff00ff;
+            transform: rotate(2deg);
         }
         
         .unlock-audio {
@@ -345,26 +309,38 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(to right, #ff6b6b, #ff3366);
-            color: white;
-            padding: 12px 25px;
+            background: linear-gradient(to right, #ff0000, #ff9900);
+            color: #fff;
+            padding: 15px 30px;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            border: none;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            border: 5px solid #ffff00;
+            box-shadow: 0 5px 0 #cc0000;
             z-index: 20;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            font-size: 1.5rem;
+            transition: all 0.1s ease;
+            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
             letter-spacing: 1px;
-            white-space: nowrap;
+            text-shadow: 1px 1px 0 #000;
         }
         
-        .unlock-audio:hover {
-            background: linear-gradient(to right, #ff3366, #ff0066);
-            transform: translateX(-50%) scale(1.15);
-            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+        .unlock-audio:active {
+            box-shadow: 0 2px 0 #cc0000;
+            transform: translateX(-50%) translateY(3px);
+        }
+        
+        .hit-counter {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 10px;
+            border: 2px solid #0f0;
+            font-size: 1.2rem;
+            z-index: 100;
         }
     </style>
     
@@ -373,12 +349,17 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 </head>
 <body>
-    <!-- Animowane elementy w tle -->
-    <div class="bg-animation" id="bgAnimation"></div>
+    <!-- Animowane tło retro -->
+    <div class="retro-bg" id="retroBg"></div>
+    
+    <!-- Licznik odwiedzin w stylu lat 90 -->
+    <div class="hit-counter">
+        <span id="hitCounter">000000</span> HITS
+    </div>
     
     <div class="container">
         <header>
-            <h1>ELOOOOO</h1>
+            <h1>ELOOO MORDO</h1>
         </header>
         
         <div class="video-container">
@@ -390,7 +371,7 @@
         </div>
 
         <div class="heart-section">
-            <p class="heart-request">DAJ SERDUSZKO BROOO<br></p>
+            <p class="heart-request">DAJ SERDUSZKO PLS<br></p>
             <button class="heart-btn" id="heartButton">🤍</button>
             <div class="counters">
                 <div class="counter">
@@ -402,12 +383,16 @@
                     <span class="counter-number" id="visitCounter">0</span>
                 </div>
             </div>
-            <div class="loading" id="loading">Ładowanie globalnych liczników...</div>
+            <div class="loading" id="loading">ŁADOWANIE DANYCH Z SERWERA... PROSZĘ CZEKAĆ...</div>
         </div>
+        
+        <footer>
+            <p></p>
+        </footer>
     </div>
 
     <script>
-        // **************** KONFIGURACJA FIREBASE - ZASTĄP TYM Z TWOJEGO PROJEKTU ****************
+        // **************** KONFIGURACJA FIREBASE ****************
         const firebaseConfig = {
             apiKey: "AIzaSyCZX592gzHd6hCcWy-QkpkVgXYzYiPVjS8",
             authDomain: "nggyu-26b8e.firebaseapp.com",
@@ -424,35 +409,29 @@
         // Referencja do dokumentu z licznikami
         const countersDoc = db.collection("counters").doc("globalCounters");
 
-        // Funkcja tworząca animowane elementy w tle
-        function createBackgroundAnimation() {
-            const bgAnimation = document.getElementById('bgAnimation');
-            const colors = [
-                '#ff6b6b', '#4ecdc4', '#ffbe0b', '#fb5607', '#8338ec', 
-                '#3a86ff', '#ff006e', '#9b5de5', '#00f5d4', '#f15bb5',
-                '#00bbf9', '#9b5de5', '#f15bb5', '#fee440', '#00f5d4'
-            ];
+        // Funkcja tworząca animowane tło retro
+        function createRetroBackground() {
+            const retroBg = document.getElementById('retroBg');
+            const symbols = ['★', '♦', '♥', '♠', '♣', '☺', '☻', '♫', '☼', '♀', '♂', '♪', '♩', '♬', '❤️', '💛', '💚', '💙', '💜'];
             
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 30; i++) {
                 const element = document.createElement('div');
-                element.classList.add('bg-element');
+                element.classList.add('retro-element');
+                element.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
                 
                 // Losowe właściwości
-                const size = Math.random() * 150 + 30;
                 const left = Math.random() * 100;
-                const animationDuration = Math.random() * 20 + 8;
-                const opacity = Math.random() * 0.25 + 0.1;
-                const color = colors[Math.floor(Math.random() * colors.length)];
+                const animationDuration = Math.random() * 20 + 10;
+                const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                const fontSize = Math.random() * 4 + 2;
                 
-                element.style.width = `${size}px`;
-                element.style.height = `${size}px`;
                 element.style.left = `${left}%`;
                 element.style.animationDuration = `${animationDuration}s`;
-                element.style.opacity = opacity;
-                element.style.background = `radial-gradient(circle, ${color}, transparent)`;
+                element.style.color = color;
+                element.style.fontSize = `${fontSize}rem`;
                 element.style.animationDelay = `${Math.random() * 5}s`;
                 
-                bgAnimation.appendChild(element);
+                retroBg.appendChild(element);
             }
         }
         
@@ -463,9 +442,10 @@
             const heartCounter = document.getElementById('heartCounter');
             const visitCounter = document.getElementById('visitCounter');
             const loading = document.getElementById('loading');
+            const hitCounter = document.getElementById('hitCounter');
             
-            // Utwórz animowane tło
-            createBackgroundAnimation();
+            // Utwórz animowane tło retro
+            createRetroBackground();
             
             // Ustaw wideo w pętli
             video.loop = true;
@@ -478,7 +458,7 @@
                     // Dodaj przycisk do odblokowania dźwięku
                     const unlockButton = document.createElement('button');
                     unlockButton.className = 'unlock-audio';
-                    unlockButton.textContent = 'KLIKNIJ';
+                    unlockButton.textContent = 'KLIKNIJ TUTAJ, ABY ODTWORZYĆ DŹWIĘK!!!';
                     unlockButton.addEventListener('click', () => {
                         video.play();
                         unlockButton.style.display = 'none';
@@ -508,8 +488,11 @@
                     // Aktualizuj licznik wejść
                     visitCounter.textContent = data.visits || 0;
                     
+                    // Aktualizuj hit counter
+                    hitCounter.textContent = String(data.visits || 0).padStart(6, '0');
+                    
                     // Ukryj komunikaty ładowania
-                    loading.textContent = "Liczniki załadowane poprawnie!";
+                    loading.textContent = "DANE ZAŁADOWANE POPRAWNIE!!!";
                     setTimeout(() => {
                         loading.style.display = 'none';
                     }, 2000);
@@ -521,16 +504,17 @@
                     });
                     heartCounter.textContent = 0;
                     visitCounter.textContent = 0;
+                    hitCounter.textContent = "000000";
                     
-                    loading.textContent = "Utworzono nowe liczniki!";
+                    loading.textContent = "TWORZENIE NOWYCH LICZNIKÓW!!!";
                     setTimeout(() => {
                         loading.style.display = 'none';
                     }, 2000);
                 }
             }).catch((error) => {
                 console.error("Błąd przy pobieraniu liczników: ", error);
-                loading.textContent = "Błąd połączenia z bazą danych. Odśwież stronę.";
-                loading.style.color = '#ff6b6b';
+                loading.textContent = "BŁĄD POŁĄCZENIA Z SERWEREM!!! ODŚWIEŻ STRONĘ!!!";
+                loading.style.color = '#ff0000';
             });
             
             // Funkcja do aktualizacji licznika wejść
@@ -538,10 +522,13 @@
                 countersDoc.get().then((doc) => {
                     if (doc.exists) {
                         const currentVisits = doc.data().visits || 0;
+                        const newVisits = currentVisits + 1;
+                        
                         countersDoc.update({
-                            visits: currentVisits + 1
+                            visits: newVisits
                         }).then(() => {
-                            visitCounter.textContent = currentVisits + 1;
+                            visitCounter.textContent = newVisits;
+                            hitCounter.textContent = String(newVisits).padStart(6, '0');
                         });
                     } else {
                         countersDoc.set({
@@ -549,6 +536,7 @@
                             hearts: 0
                         });
                         visitCounter.textContent = 1;
+                        hitCounter.textContent = "000001";
                     }
                 });
             }
@@ -564,7 +552,7 @@
             heartButton.addEventListener('click', function() {
                 if (!userHasLiked) {
                     // Pokaż ładowanie
-                    loading.textContent = "Zapisujemy Twoje serduszko w bazie danych...";
+                    loading.textContent = "ZAPISYWANIE SERDUSZKA W BAZIE DANYCH...";
                     loading.style.display = 'block';
                     
                     // Zwiększ licznik serduszek w Firestore
@@ -585,33 +573,33 @@
                             heartButton.textContent = '❤️';
                             heartButton.classList.add('liked');
                             
-                            // Animacja serduszka
-                            heartButton.style.transform = 'scale(1.5)';
+                            // Animacja przycisku
+                            heartButton.style.transform = 'scale(1.2) rotate(-10deg)';
                             setTimeout(() => {
-                                heartButton.style.transform = 'scale(1)';
+                                heartButton.style.transform = 'scale(1) rotate(-5deg)';
                             }, 300);
                             
                             // Utwórz animowane serduszka
                             createHeartAnimations(event.clientX, event.clientY);
                             
                             // Pokaż potwierdzenie
-                            loading.textContent = "DZIĘKI MORDECZKO❤️";
-                            loading.style.color = '#ffdf00';
+                            loading.textContent = "DZIĘKUJEMY ZA SERDUSZKO!!! ❤️";
+                            loading.style.color = '#ff00ff';
                             setTimeout(() => {
                                 loading.style.display = 'none';
                             }, 2000);
                         });
                     }).catch((error) => {
                         console.error("Błąd przy aktualizacji serduszek: ", error);
-                        loading.textContent = "Błąd zapisu serduszka. Spróbuj ponownie.";
-                        loading.style.color = '#ff6b6b';
+                        loading.textContent = "BŁĄD!!! SPRÓBUJ PONOWNIE!!!";
+                        loading.style.color = '#ff0000';
                     });
                 }
             });
             
             // Funkcja tworząca animowane serduszka
             function createHeartAnimations(x, y) {
-                const heartsCount = 5;
+                const heartsCount = 7;
                 for (let i = 0; i < heartsCount; i++) {
                     setTimeout(() => {
                         const heart = document.createElement('div');
@@ -619,21 +607,21 @@
                         heart.classList.add('heart-animation');
                         
                         // Losowe przesunięcie
-                        const offsetX = (Math.random() - 0.5) * 150;
-                        const offsetY = (Math.random() - 0.5) * 100;
+                        const offsetX = (Math.random() - 0.5) * 300;
+                        const offsetY = (Math.random() - 0.5) * 200;
                         
                         heart.style.left = `${x + offsetX}px`;
                         heart.style.top = `${y + offsetY}px`;
                         document.body.appendChild(heart);
                         
                         // Losowy rozmiar
-                        heart.style.fontSize = `${Math.random() * 2 + 2}rem`;
+                        heart.style.fontSize = `${Math.random() * 4 + 2}rem`;
                         
                         // Usuń element po zakończeniu animacji
                         setTimeout(() => {
                             heart.remove();
                         }, 2000);
-                    }, i * 200);
+                    }, i * 150);
                 }
             }
         });
